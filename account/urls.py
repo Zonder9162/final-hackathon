@@ -5,7 +5,6 @@ from .views import RegisterAPIView, activate
 
 
 urlpatterns = [
-
     path('register/', RegisterAPIView.as_view()),
     path('activate/<str:activation_code>/', activate),
     path('api/token/', TokenObtainPairView.as_view()),
