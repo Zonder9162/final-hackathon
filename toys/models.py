@@ -40,3 +40,7 @@ class Comment(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
     product = models.ForeignKey(Toy, related_name='likes', on_delete=models.CASCADE)
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, related_name='favorite', on_delete=models.CASCADE)
+    anime = models.ForeignKey(Toy, related_name='favorite', on_delete=models.CASCADE)

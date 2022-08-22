@@ -1,7 +1,7 @@
 from itertools import product
 from rest_framework import serializers
 
-from .models import Toy, Category, Comment, Like, Rating
+from .models import Favorite, Toy, Category, Comment, Like, Rating
 
 class ToySerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,3 +44,8 @@ class CommentSerializer(serializers.ModelSerializer):
         rep = super().to_representation(instance)
         rep["user"] = instance.user.email
         return rep
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Favorite
+        exclude = ['user']

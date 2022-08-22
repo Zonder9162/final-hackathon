@@ -13,8 +13,10 @@ from rest_framework.response import Response
 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
+import toys
+
 from .models import Toy, Category, Comment, Like, Rating
-from .serializers import ToySerializer, CategorySerializer, CommentSerializer
+from .serializers import ToySerializer, CategorySerializer, CommentSerializer, FavoriteSerializer
 from .permissions import IsAuthor
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
@@ -95,7 +97,7 @@ def toggle_like(request, t_id):
     return Response("Like toggled", 200)
 
 @api_view(['POST'])
-def add_rating(request, a_id):
+def add_rating(request, t_id):
     user = request.user
     toy = get_object_or_404(Toy, id=t_id)
     value = request.POST.get('value')
@@ -114,3 +116,23 @@ def add_rating(request, a_id):
         Rating.objects.create(user=user,toy=toy, value=value)
 
     return Response('Rating created', 201)
+
+@api_view(['GET'])
+def add_to_favorite(request, t_id):
+    user = request.user
+    toy = get_object_or_404(Toy, id=t_id)
+
+    if Favorite.objects.filter(user=user, toy=toy).exists():
+        Favorite.objects.filter(user=user, toy=toy).delete()
+    else:
+        Favorite.objects.create(user=user, toy=toy)
+    return Response("added to favoritos", 200)
+
+class FavoriteViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = Favorite.objects.all()
+    serializer_class = FavoriteSerializer
+    permission_classes = [IsAuthenticated, IsAuthor]
+
+    def filter_queryset(self, queryset):
+        new_queryset = queryset.filter(user=self.request.user)
+        return new_queryset
