@@ -22,7 +22,7 @@ from django.shortcuts import render, redirect
 from .models import *
 
 
-class AnimeViewSet(ModelViewSet):
+class ToyViewSet(ModelViewSet):
     queryset = Toy.objects.all()
     serializer_class = ToySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
