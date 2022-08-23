@@ -42,5 +42,5 @@ class Like(models.Model):
     toys = models.ForeignKey(Toy, related_name='likes', on_delete=models.CASCADE)
 
 class Favorite(models.Model):
-    user = models.ForeihangnKey(User, related_name='favorite', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='favorite', on_delete=models.CASCADE)
     toys = models.ForeignKey(Toy, related_name='favorite', on_delete=models.CASCADE)
