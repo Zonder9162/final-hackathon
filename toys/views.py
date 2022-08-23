@@ -53,7 +53,7 @@ class ToyViewSet(ModelViewSet):
 
     @action(methods=['GET'], detail=False)
     def order_by_rating(self, request):
-        queryset = sorted(self.get_queryset(), key=lambda toy: toy.average_rating, reverse=True)
+        queryset = sorted(self.get_queryset(), key=lambda toys: toys.average_rating, reverse=True)
         queryset = self.paginate_queryset(queryset)
         serializer = ToySerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data, 200)
@@ -88,18 +88,18 @@ class CommentViewSet(mixins.CreateModelMixin,
 @api_view(['GET'])
 def toggle_like(request, t_id):
     user = request.user
-    toy = get_object_or_404(Toy, id=t_id)
+    toys = get_object_or_404(Toy, id=t_id)
 
-    if Like.objects.filter(user=user,toy=toy).exists():
-        Like.objects.filter(user=user, toy=toy).delete()
+    if Like.objects.filter(user=user,toys=toys).exists():
+        Like.objects.filter(user=user, toys=toys).delete()
     else:
-        Like.objects.create(user=user, toy=toy)
+        Like.objects.create(user=user, toys=toys)
     return Response("Like toggled", 200)
 
 @api_view(['POST'])
 def add_rating(request, t_id):
     user = request.user
-    toy = get_object_or_404(Toy, id=t_id)
+    toys = get_object_or_404(Toy, id=t_id)
     value = request.POST.get('value')
 
     if not user.is_authenticated:
@@ -108,25 +108,25 @@ def add_rating(request, t_id):
     if not value:
         raise ValueError("Value is required")
 
-    if Rating.objects.filter(user=user, toy=toy).exists():
-        rating = Rating.objects.get(user=user, toy=toy)
+    if Rating.objects.filter(user=user, toys=toys).exists():
+        rating = Rating.objects.get(user=user, toys=toys)
         rating.value = value
         rating.save()
     else:
-        Rating.objects.create(user=user,toy=toy, value=value)
+        Rating.objects.create(user=user,toys=toys, value=value)
 
     return Response('Rating created', 201)
 
 @api_view(['GET'])
 def add_to_favorite(request, t_id):
     user = request.user
-    toy = get_object_or_404(Toy, id=t_id)
+    toys = get_object_or_404(Toy, id=t_id)
 
-    if Favorite.objects.filter(user=user, toy=toy).exists():
-        Favorite.objects.filter(user=user, toy=toy).delete()
+    if Favorite.objects.filter(user=user, toys=toys).exists():
+        Favorite.objects.filter(user=user, toys=toys).delete()
     else:
-        Favorite.objects.create(user=user, toy=toy)
-    return Response("added to favoritos", 200)
+        Favorite.objects.create(user=user, toys=toys)
+    return Response("added to favorite", 200)
 
 class FavoriteViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = Favorite.objects.all()

@@ -19,9 +19,9 @@ class ToySerializer(serializers.ModelSerializer):
         request = self.context.get("request")
 
         if request.user.is_authenticated:
-            rep["liked_by_user"] = Like.objects.filter(user=request.user, product=instance).exists()
-            if Rating.objects.filter(user=request.user, product=instance).exists():
-                rating = Rating.objects.get(user=request.user, product=instance)
+            rep["liked_by_user"] = Like.objects.filter(user=request.user, toys=instance).exists()
+            if Rating.objects.filter(user=request.user, toys=instance).exists():
+                rating = Rating.objects.get(user=request.user, toys=instance)
                 rep["user_rating"] = rating.value
 
         return rep
