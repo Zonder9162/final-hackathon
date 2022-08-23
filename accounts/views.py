@@ -1,11 +1,13 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from django.urls import is_valid_path
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from drf_yasg.utils import swagger_auto_schema
+from django.http import HttpResponse
+
 
 from .serializers import RegisterSerializer
 
@@ -28,3 +30,4 @@ def activate(request, activation_code):
     user.save()
     return redirect('http://127.0.0.1:3000/')
     
+

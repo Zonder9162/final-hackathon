@@ -14,14 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include 
 from django.conf.urls.static import static
 from django.conf import settings
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-
+from .views import Home # new
 from config.settings import STATIC_ROOT
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -34,9 +35,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', include('account.urls')),
+    path('account/', include('accounts.urls')),
     path('docs/', schema_view.with_ui("swagger")),
-    path('', include('toys.urls')),
+    path('toys/', include('toys.urls')),
+    path("", Home.as_view(), name="home"),
+    path("accounts/", include("allauth.urls")),
 ]
 
 
