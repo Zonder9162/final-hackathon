@@ -30,7 +30,7 @@ class ToyViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ['name', 'price']
-
+    
 
     def get_serializer_context(self):
         context = super().get_serializer_context()

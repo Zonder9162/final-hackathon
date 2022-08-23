@@ -37,7 +37,13 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('docs/', schema_view.with_ui("swagger")),
     path('', include('toys.urls')),
+    #path('cart/', include('cart.urls')),
 ]
+
+
+    
+
+   
 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

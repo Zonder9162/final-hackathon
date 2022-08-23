@@ -9,7 +9,7 @@ router = DefaultRouter()
 router.register('toys', ToyViewSet)
 router.register('categories', CategoryViewSet)
 router.register('comments', CommentViewSet)
-router.register('favorite', FavoriteViewSet)
+# router.register('favorite', FavoriteViewSet)
 
 
 urlpatterns = [

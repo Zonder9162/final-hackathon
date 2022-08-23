@@ -29,6 +29,7 @@ DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
+CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 
     'account',
     'toys',
+    'cart',
 ]
 
 MIDDLEWARE = [
