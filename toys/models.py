@@ -26,21 +26,21 @@ class Toy(models.Model):
 
 class Rating(models.Model):
     user = models.ForeignKey(User, related_name='ratings', on_delete=models.CASCADE)
-    product = models.ForeignKey(Toy, related_name='ratings', on_delete=models.CASCADE)
+    toys = models.ForeignKey(Toy, related_name='ratings', on_delete=models.CASCADE)
     value = models.IntegerField(choices=[(1,1), (2,2), (3,3), (4,4), (5,5)])
 
 
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    product = models.ForeignKey(Toy, related_name='comments', on_delete=models.CASCADE)    
+    toys = models.ForeignKey(Toy, related_name='comments', on_delete=models.CASCADE)    
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
 
 class Like(models.Model):
     user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
-    product = models.ForeignKey(Toy, related_name='likes', on_delete=models.CASCADE)
+    toys = models.ForeignKey(Toy, related_name='likes', on_delete=models.CASCADE)
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, related_name='favorite', on_delete=models.CASCADE)
-    anime = models.ForeignKey(Toy, related_name='favorite', on_delete=models.CASCADE)
+    toys = models.ForeignKey(Toy, related_name='favorite', on_delete=models.CASCADE)
