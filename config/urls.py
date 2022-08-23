@@ -40,6 +40,8 @@ urlpatterns = [
     path('toys/', include('toys.urls')),
     path("", Home.as_view(), name="home"),
     path("accounts/", include("allauth.urls")),
+    path('', include('toys.urls')),
+    #path('cart/', include('cart.urls')),
 ]
 
 
