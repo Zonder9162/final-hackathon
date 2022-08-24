@@ -58,7 +58,7 @@ INSTALLED_APPS = [
 
     'accounts',
     'toys',
-    'cart',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -103,26 +103,27 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
-import dj_database_url
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql'
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': 'localhost',
+            'PORT': '5432'
+        }
     }
-} 
+else: 
+    import dj_database_url
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql'
+        }
+    } 
 
-db = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db)
+    db = dj_database_url.config(conn_max_age=600)
+    DATABASES['default'].update(db)
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -241,6 +242,14 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_ON_GET = True
 
+
+
+# Для сброса пароля от админ панели
+# Для этого входим в manage.py shell
+# >>>from django.contrib.auth.models import User
+# >>>user = User.objects.get( username='root')
+# >>>user.set_password(«password»)
+# >>>user.save()
 
 
 

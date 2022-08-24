@@ -38,20 +38,20 @@ def activate(request, activation_code):
 
 
 
-class LoginView(TokenObtainPairView):
-    serializer_class = LoginSerializer
+# class LoginView(TokenObtainPairView):
+#     serializer_class = LoginSerializer
 
-class LogoutAPIView(GenericAPIView):
-    serializer_class = LogoutSerializer
-    permission_classes = [IsAuthenticated, ]
+# class LogoutAPIView(GenericAPIView):
+#     serializer_class = LogoutSerializer
+#     permission_classes = [IsAuthenticated, ]
 
-    def post(self, request):
-        serializers = self.serializer_class(data=request.data)
-        serializers.is_valid(raise_exception=True)
-        serializers.save()
-        return Response(
-            {"msg":"You successfully logged out"}, 
-            status=status.HTTP_204_NO_CONTENT
-        )
+#     def post(self, request):
+#         serializers = self.serializer_class(data=request.data)
+#         serializers.is_valid(raise_exception=True)
+#         serializers.save()
+#         return Response(
+#             {"msg":"You successfully logged out"}, 
+#             status=status.HTTP_204_NO_CONTENT
+#         )
     
 
