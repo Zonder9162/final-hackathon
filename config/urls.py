@@ -37,11 +37,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('accounts.urls')),
     path('docs/', schema_view.with_ui("swagger")),
-    path('toys/', include('toys.urls')),
     path("", Home.as_view(), name="home"),
     path("accounts/", include("allauth.urls")),
     path('', include('toys.urls')),
-    #path('cart/', include('cart.urls')),
 ]
 
 
