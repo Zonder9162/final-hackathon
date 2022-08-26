@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
+from .models import send_activation_code
 
 User = get_user_model()
 
@@ -34,6 +35,12 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         print('CREATING USER WITH DATA:', validated_data)
         return User.objects.create_user(**validated_data)
+
+
+    def save(self):
+        data = self.validated_data
+        user = User.objects.create_user(**data)
+        user.send_activation_code()
 
 
 
@@ -74,3 +81,20 @@ class RegisterSerializer(serializers.ModelSerializer):
 #             RefreshToken(self.token).blacklist()
 #         except TokenError:
 #             self.fail('bad_token')
+
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    
+    contact_us = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "email",
+            'name',
+            'last_name',
+            "username",
+            'contact_us',
+        )

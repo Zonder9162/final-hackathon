@@ -41,6 +41,8 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path('', include('toys.urls')),
     path('', include('order.urls')),
+    path('chat/', include('chat.urls')),
+
 ]
 
 

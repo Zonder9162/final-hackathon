@@ -50,15 +50,18 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.github", # new
     "allauth.socialaccount.providers.twitter", # new
 
+    # libs
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
     'whitenoise.runserver_nostatic',
     'corsheaders',
 
+    # my apps
     'accounts',
     'toys',
     'order',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -251,6 +254,9 @@ ACCOUNT_LOGOUT_ON_GET = True
 # >>>user.set_password(«password»)
 # >>>user.save()
 
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 
 
 

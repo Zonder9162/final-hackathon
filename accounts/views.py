@@ -7,10 +7,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import get_object_or_404, GenericAPIView
+from rest_framework.generics import get_object_or_404, GenericAPIView, ListAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from drf_yasg.utils import swagger_auto_schema
 from django.http import HttpResponse
+
+
 
 
 
@@ -53,5 +56,10 @@ def activate(request, activation_code):
 #             {"msg":"You successfully logged out"}, 
 #             status=status.HTTP_204_NO_CONTENT
 #         )
-    
 
+    
+class ProfileView(ListAPIView):
+
+    queryset = User.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
