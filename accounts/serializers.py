@@ -36,11 +36,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         print('CREATING USER WITH DATA:', validated_data)
         return User.objects.create_user(**validated_data)
 
-
     def save(self):
         data = self.validated_data
         user = User.objects.create_user(**data)
         user.send_activation_code()
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
 
 
 
@@ -84,6 +89,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     
     contact_us = serializers.SerializerMethodField()
@@ -98,3 +104,4 @@ class ProfileSerializer(serializers.ModelSerializer):
             "username",
             'contact_us',
         )
+
