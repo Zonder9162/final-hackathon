@@ -38,8 +38,6 @@ class ToyViewSet(ModelViewSet):
         return context
 
     @swagger_auto_schema(manual_parameters=[openapi.Parameter('name', openapi.IN_QUERY, 'search toy by name', type=openapi.TYPE_STRING)])
-
-
     @action(methods=['GET'], detail=False)
     def search(self, request):
         name = request.query_params.get('name')
@@ -47,6 +45,19 @@ class ToyViewSet(ModelViewSet):
         if name:
             queryset = queryset.filter(name__icontains=name)
         
+        serializer = ToySerializer(queryset, many=True, context={'request':request})
+        return Response(serializer.data, 200)
+
+
+    @swagger_auto_schema(manual_parameters=[openapi.Parameter('categories', openapi.IN_QUERY, 'recommended by category', type=openapi.TYPE_STRING, required=True)])
+    @action(methods=['GET'], detail=False)
+    def recommendations(self, request):
+        categories_title = request.query_params.get('categories')
+        categories = Category.objects.get(title__icontains=categories_title)
+
+        queryset = self.get_queryset()
+        queryset = queryset.filter(categories=categories)
+
         serializer = ToySerializer(queryset, many=True, context={'request':request})
         return Response(serializer.data, 200)
 

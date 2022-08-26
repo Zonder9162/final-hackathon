@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, authenticate, login
 from django.urls import is_valid_path
 from django.shortcuts import redirect, render
 from django.shortcuts import redirect
-from rest_framework import status, generics, permissions
+from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -10,12 +10,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import get_object_or_404, GenericAPIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 from drf_yasg.utils import swagger_auto_schema
-from django.http import HttpResponse
-from knox.models import AuthToken
-from knox.views import LoginView as KnoxLoginView
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 
-from .serializers import *
+from .serializers import RegisterSerializer, ChangePasswordSerializer
 
 User = get_user_model()
 

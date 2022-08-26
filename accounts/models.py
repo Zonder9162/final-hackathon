@@ -57,3 +57,4 @@ class User(AbstractUser):
         activation_url = f'https://toys-backend2022.herokuapp.com/account/activate/{self.activation_code}/'
         message = f'Activate your account, following this link {activation_url}'
         send_mail("Activate account", message, "toys@gmail.com", [self.email])
+
