@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from accounts.tasks import send_activation_code
+from .tasks import send_activation_code
 
 
 class UserManager(BaseUserManager):

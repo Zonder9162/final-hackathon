@@ -42,6 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django.contrib.sites",  # new
 
+    # my apps
+    'toys',
+
+    'chat',
+    'order',
+    
+    'accounts',
+
     # 3rd party
     "allauth", # new
     "allauth.account", # new
@@ -57,12 +65,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'corsheaders',
 
-    # my apps
-    'accounts',
-    'toys',
-
-    'order',
-    'chat',
+    
 ]
 
 MIDDLEWARE = [
@@ -241,6 +244,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
 }
+CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ALLOW_ORIGINS = [
     'http://localhost:3000',
