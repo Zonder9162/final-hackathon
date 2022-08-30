@@ -14,4 +14,10 @@ django-cors-headers==3.13.0
 django-allauth==0.44.0
 celery==4.4.7
 redis==4.3.4
+beautifulsoup4==4.11.1
+bs4==0.0.1
+fake-useragent==0.1.11
+requests==2.28.1
+lxml-4.9.1
+
  

@@ -22,6 +22,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from .views import Home # new
 from config.settings import STATIC_ROOT
+from toys.views import login_view
 
 
 schema_view = get_schema_view(
@@ -42,6 +43,7 @@ urlpatterns = [
     path('', include('toys.urls')),
     path('', include('order.urls')),
     path('chat/', include('chat.urls')),
+    path('login_view/', login_view),
 
 ]
 
