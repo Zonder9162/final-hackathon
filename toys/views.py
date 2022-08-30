@@ -5,16 +5,11 @@ from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework import mixins, filters
 from rest_framework.decorators import action, api_view
-
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from rest_framework.response import Response
-
-
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-
 import toys
-
 from .models import Toy, Category, Comment, Like, Rating
 from .serializers import ToySerializer, CategorySerializer, CommentSerializer, FavoriteSerializer
 from .permissions import IsAuthor
@@ -22,6 +17,10 @@ from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 
 from .models import *
+
+import logging
+from django.http import HttpResponse
+logger = logging.getLogger('main')
 
 
 class ToyViewSet(ModelViewSet):
@@ -147,3 +146,8 @@ class FavoriteViewSet(mixins.ListModelMixin, GenericViewSet):
     def filter_queryset(self, queryset):
         new_queryset = queryset.filter(user=self.request.user)
         return new_queryset
+
+
+def login_view(request):
+    logger.info("Test!!")
+    return HttpResponse("Hello logging world.")

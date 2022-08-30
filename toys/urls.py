@@ -5,6 +5,7 @@ from .views import ToyViewSet, CategoryViewSet, FavoriteViewSet, CommentViewSet,
 from . import views 
 
 
+
 router = DefaultRouter()
 router.register('toys', ToyViewSet)
 router.register('categories', CategoryViewSet)
@@ -17,5 +18,6 @@ urlpatterns = [
     path('toys/toggle_like/<int:a_id>/', toggle_like),
     path('toys/add_rating/<int:a_id>/', add_rating),
     path('toys/add_to_favorite/<int:t_id>/', add_to_favorite),
-  
+    
 ]
+
