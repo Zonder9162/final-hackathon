@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from toys.models import Toy
 
-from config.celery import app
-from django.core.mail import send_mail
+# from config.celery import app
+# from django.core.mail import send_mail
 
 
 User = get_user_model()
@@ -27,9 +27,9 @@ class Order(models.Model):
     def __str__(self):
         return f'{self.email} - {self.phone}'
 
-    @staticmethod
-    def order_created(self):
-        order_created.delay(self.id)
+    # @staticmethod
+    # def order_created(self):
+    #     order_created.delay(self.id)
 
 
 class OrderToys(models.Model):
@@ -39,14 +39,14 @@ class OrderToys(models.Model):
 
 
 
-@app.task
-def order_created(order_id):
-    """
-    Task to send e-mail notification when an order is successfully created.
-    """
-    order = Order.objects.get(id=order_id)
-    subject = 'Order nr. {}'.format(order.id)
-    message = 'You have successfully placed an order.\
-                Your order id is {}.'.format(order.id)
-    mail_sent = send_mail(subject, message, 'admin@myshop.com', [order.email])
-    return mail_sent
+# @app.task
+# def order_created(order_id):
+#     """
+#     Task to send e-mail notification when an order is successfully created.
+#     """
+#     order = Order.objects.get(id=order_id)
+#     subject = 'Order nr. {}'.format(order.id)
+#     message = 'You have successfully placed an order.\
+#                 Your order id is {}.'.format(order.id)
+#     mail_sent = send_mail(subject, message, 'admin@myshop.com', [order.email])
+#     return mail_sent

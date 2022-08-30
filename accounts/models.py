@@ -1,7 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from .tasks import send_activation_code
 
 
 class UserManager(BaseUserManager):
@@ -38,8 +37,6 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     email = models.EmailField(max_length=150, unique=True)
-    name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=100)
     username = models.CharField(max_length=150)
     activation_code = models.CharField(max_length=8, blank=True)
 
@@ -48,7 +45,6 @@ class User(AbstractUser):
 
     objects = UserManager()
 
-    @staticmethod
     def generate_activation_code(self):
         from django.utils.crypto import get_random_string
         code = get_random_string(length=8, allowed_chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
@@ -56,11 +52,8 @@ class User(AbstractUser):
         self.save()
     
     def send_activation_code(self):
-        send_activation_code.delay(self.id)
-
-
-
-    
-
-        
-
+        from django.core.mail import send_mail
+        self.generate_activation_code()
+        activation_url = f'https://toys-backend2022.herokuapp.com/account/activate/{self.activation_code}/'
+        message = f'Activate your account, following this link {activation_url}'
+        send_mail("Activate account", message, "toys@gmail.com", [self.email])
