@@ -1,17 +1,13 @@
-from django.contrib.auth import get_user_model, authenticate, login
-from django.urls import is_valid_path
-from django.shortcuts import redirect, render
+from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import get_object_or_404, GenericAPIView, ListAPIView
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.generics import get_object_or_404, ListAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.authtoken.serializers import AuthTokenSerializer
 
 from .serializers import *
 from .serializers import RegisterSerializer, ChangePasswordSerializer
@@ -89,8 +85,8 @@ class ChangePasswordView(generics.UpdateAPIView):
 #         )
 
     
-class ProfileView(ListAPIView):
+# class ProfileView(ListAPIView):
 
-    queryset = User.objects.all()
-    serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+#     queryset = User.objects.all()
+#     serializer_class = ProfileSerializer
+#     permission_classes = [IsAuthenticatedOrReadOnly]
