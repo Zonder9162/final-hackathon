@@ -110,32 +110,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-<<<<<<< HEAD
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': config('DB_NAME'),
-#             'USER': config('DB_USER'),
-#             'PASSWORD': config('DB_PASSWORD'),
-#             'HOST': 'localhost',
-#             'PORT': '5432'
-#         }
-#     }
-# else: 
-#     import dj_database_url
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql'
-#         }
-#     } 
 
-#     db = dj_database_url.config(conn_max_age=600)
-#     DATABASES['default'].update(db)
-
-
-
-=======
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -148,7 +123,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # }
 
 import dj_database_url
->>>>>>> 97efea5c404460d80d74e787a8fb82a883885242
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql'
@@ -158,67 +133,7 @@ DATABASES = {
 db = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db)
 
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': config('DB_NAME'),
-#             'USER': config('DB_USER'),
-#             'PASSWORD': config('DB_PASSWORD'),
-#             'HOST': 'localhost',
-#             'PORT': '5432'
-#         }
-#     }
-<<<<<<< HEAD
-# } 
 
-# db = dj_database_url.config(conn_max_age=600)
-# DATABASES['default'].update(db)
-
-=======
-# else: 
-#     import dj_database_url
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql'
-#         }
-#     } 
-
-#     db = dj_database_url.config(conn_max_age=600)
-#     DATABASES['default'].update(db)
-
-import dj_database_url
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql'
-    }
-} 
-
-db = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db)
-
-# if DEBUG:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': config('DB_NAME'),
-#             'USER': config('DB_USER'),
-#             'PASSWORD': config('DB_PASSWORD'),
-#             'HOST': 'localhost',
-#             'PORT': '5432'
-#         }
-#     }
-# else: 
-#     import dj_database_url
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql'
-#         }
-#     } 
-
-    # db = dj_database_url.config(conn_max_age=600)
-    # DATABASES['default'].update(db)
->>>>>>> 97efea5c404460d80d74e787a8fb82a883885242
 
 
 AUTH_USER_MODEL = 'accounts.User'
